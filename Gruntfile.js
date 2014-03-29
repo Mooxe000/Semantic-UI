@@ -3,8 +3,9 @@ module.exports = function(grunt) {
   var
 
     defaultTasks = [
-      // run grunt watch
-      'watch'
+      'reset',
+      'release',
+      'build'
     ],
 
     watchTasks = [
@@ -232,7 +233,7 @@ module.exports = function(grunt) {
         dest   : 'build/',
         src    : [
           '**/*.less',
-          '**/*.css',
+          '**/*.css'
         ]
       },
       prefixDocs: {
@@ -241,7 +242,7 @@ module.exports = function(grunt) {
         dest   : 'docs/build/',
         src    : [
           '**/*.less',
-          '**/*.css',
+          '**/*.css'
         ]
       },
       prefixFile: {
@@ -289,10 +290,10 @@ module.exports = function(grunt) {
         cwd    : 'build/',
         src    : [
           '**/*.less',
-          '**/*.css',
+          '**/*.css'
         ],
         dest   : 'rtl'
-      },
+      }
     },
 
     less: {
@@ -521,7 +522,7 @@ module.exports = function(grunt) {
       createDocsJSPackage: {
         src: ['docs/build/uncompressed/**/*.js'],
         dest: 'docs/build/packaged/javascript/semantic.js'
-      },
+      }
     },
 
     cssmin: {
@@ -643,15 +644,18 @@ module.exports = function(grunt) {
   grunt.initConfig(config);
 
   grunt.registerTask('default', defaultTasks);
-  grunt.registerTask('test', testTasks);
 
+  grunt.registerTask('reset', resetTasks);
   grunt.registerTask('release', releaseTasks);
+  grunt.registerTask('build', buildTasks); // include tasks rtl && docs
   grunt.registerTask('rtl', rtlTasks);
   grunt.registerTask('docs', docTasks);
-  grunt.registerTask('build', buildTasks);
-  grunt.registerTask('reset', resetTasks);
+
+  grunt.registerTask('watch', watchTasks);
+  grunt.registerTask('test', testTasks);
 
   // compiles only changed less files <https://npmjs.org/package/grunt-contrib-watch>
+  grunt.event.on('test', setWatchTests);
   grunt.event.on('watch', setWatchFiles);
 
 };
