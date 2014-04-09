@@ -120,7 +120,8 @@ module.exports = function(grunt) {
       'copy:specToDocs'
     ],
 
-    buildTasks = releaseTasks.concat(rtlTasks).concat(docTasks),
+    buildTasks     = releaseTasks.concat(rtlTasks).concat(docTasks),
+    testWatchTasks = testTasks.concat(watchTasks),
 
     setWatchTests = function(action, filePath) {
       var
