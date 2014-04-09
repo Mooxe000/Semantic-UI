@@ -5,6 +5,7 @@ node/server.json
 test/coverage/
 coverage/
 semantic.config
+semanticui/
 
 # Numerous always-ignore extensions
 *.diff
